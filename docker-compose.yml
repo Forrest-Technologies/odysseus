@@ -121,14 +121,11 @@ services:
       - SETUID
       - DAC_OVERRIDE
     healthcheck:
-    test:
-      - CMD-SHELL
-      - 'python -c "import urllib.request; urllib.request.urlopen(''http://localhost:8338/'', timeout=5).read(1)"'
-    interval: 10s
-    timeout: 8s
-    retries: 30
-    start_period: 30s   # give it more runway before retries begin
-    restart: unless-stopped
+      test: 'python -c "import urllib.request; urllib.request.urlopen(''http://localhost:8338/'', timeout=5).read(1)"'
+      interval: 10s
+      timeout: 8s
+      retries: 30
+      start_period: 30s
 
   ntfy:
     image: docker.io/binwiederhier/ntfy
